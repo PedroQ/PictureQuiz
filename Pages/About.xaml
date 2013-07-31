@@ -1,0 +1,75 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="PictureQuiz.About"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="False"
+    toolkit:TiltEffect.IsTiltEnabled="True">
+
+    <toolkit:TransitionService.NavigationInTransition>
+        <toolkit:NavigationInTransition>
+            <toolkit:NavigationInTransition.Backward>
+                <toolkit:TurnstileTransition Mode="BackwardIn"/>
+            </toolkit:NavigationInTransition.Backward>
+            <toolkit:NavigationInTransition.Forward>
+                <toolkit:TurnstileTransition Mode="ForwardIn"/>
+            </toolkit:NavigationInTransition.Forward>
+        </toolkit:NavigationInTransition>
+    </toolkit:TransitionService.NavigationInTransition>
+    <toolkit:TransitionService.NavigationOutTransition>
+        <toolkit:NavigationOutTransition>
+            <toolkit:NavigationOutTransition.Backward>
+                <toolkit:TurnstileTransition Mode="BackwardOut"/>
+            </toolkit:NavigationOutTransition.Backward>
+            <toolkit:NavigationOutTransition.Forward>
+                <toolkit:TurnstileTransition Mode="ForwardOut"/>
+            </toolkit:NavigationOutTransition.Forward>
+        </toolkit:NavigationOutTransition>
+    </toolkit:TransitionService.NavigationOutTransition>
+
+    <!--LayoutRoot is the root grid where all page content is placed-->
+    <Grid x:Name="LayoutRoot" Background="#FF556C7D">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!--TitlePanel contains the name of the application and page title-->
+        <StackPanel Grid.Row="0" Margin="12,17,0,28">
+            <TextBlock Text="PICTURE QUIZ" Style="{StaticResource PhoneTextNormalStyle}"/>
+            <TextBlock Text="about" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+        </StackPanel>
+
+        <!--ContentPanel - place additional content here-->
+        <StackPanel x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+            <RichTextBox>
+                <Paragraph x:Name="VersionText" />
+                <Paragraph>
+                    <LineBreak />Created by Pedro Querido
+                </Paragraph>
+                <Paragraph>
+                    <LineBreak />This game was created to demonstrate some of the functionalities of the Nokia Imaging SDK.
+                </Paragraph>
+                <Paragraph>
+                    <LineBreak />Be sure to read the article with the details at the
+                    <Hyperlink NavigateUri="http://developer.nokia.com/Community/Wiki/Wiki_Home" TargetName="_blank" Foreground="#FF8FCBFF" >Nokia Developer Wiki</Hyperlink>
+                </Paragraph>
+                <Paragraph>
+                    <LineBreak /> All the pictures were obtained from Flickr under the Creative Commons
+                    <Hyperlink NavigateUri="https://creativecommons.org/licenses/by/2.0/" TargetName="_blank" Foreground="#FF8FCBFF">Attribution License</Hyperlink>
+                </Paragraph>
+            </RichTextBox>
+            <Image Source="/Assets/cc-by.png" Height="50" Margin="0,12" />
+        </StackPanel>
+    </Grid>
+
+</phone:PhoneApplicationPage>

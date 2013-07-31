@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PictureQuiz", "PictureQuiz.csproj", "{1A468AC1-864C-4177-B8D3-BCC7B23B6335}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{D97BF2C3-B6E8-4FE7-971A-5560F3A61763}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|ARM = Debug|ARM
+		Debug|x86 = Debug|x86
+		Release|ARM = Release|ARM
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1A468AC1-864C-4177-B8D3-BCC7B23B6335}.Debug|ARM.ActiveCfg = Debug|ARM
+		{1A468AC1-864C-4177-B8D3-BCC7B23B6335}.Debug|ARM.Build.0 = Debug|ARM
+		{1A468AC1-864C-4177-B8D3-BCC7B23B6335}.Debug|ARM.Deploy.0 = Debug|ARM
+		{1A468AC1-864C-4177-B8D3-BCC7B23B6335}.Debug|x86.ActiveCfg = Debug|x86
+		{1A468AC1-864C-4177-B8D3-BCC7B23B6335}.Debug|x86.Build.0 = Debug|x86
+		{1A468AC1-864C-4177-B8D3-BCC7B23B6335}.Debug|x86.Deploy.0 = Debug|x86
+		{1A468AC1-864C-4177-B8D3-BCC7B23B6335}.Release|ARM.ActiveCfg = Release|ARM
+		{1A468AC1-864C-4177-B8D3-BCC7B23B6335}.Release|ARM.Build.0 = Release|ARM
+		{1A468AC1-864C-4177-B8D3-BCC7B23B6335}.Release|ARM.Deploy.0 = Release|ARM
+		{1A468AC1-864C-4177-B8D3-BCC7B23B6335}.Release|x86.ActiveCfg = Release|x86
+		{1A468AC1-864C-4177-B8D3-BCC7B23B6335}.Release|x86.Build.0 = Release|x86
+		{1A468AC1-864C-4177-B8D3-BCC7B23B6335}.Release|x86.Deploy.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

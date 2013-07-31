@@ -1,0 +1,84 @@
+﻿<phone:PhoneApplicationPage
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    x:Class="PictureQuiz.MainPage"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    shell:SystemTray.IsVisible="False"
+    toolkit:TiltEffect.IsTiltEnabled="True">
+
+
+    <toolkit:TransitionService.NavigationInTransition>
+        <toolkit:NavigationInTransition>
+            <toolkit:NavigationInTransition.Backward>
+                <toolkit:TurnstileTransition Mode="BackwardIn"/>
+            </toolkit:NavigationInTransition.Backward>
+            <toolkit:NavigationInTransition.Forward>
+                <toolkit:TurnstileTransition Mode="ForwardIn"/>
+            </toolkit:NavigationInTransition.Forward>
+        </toolkit:NavigationInTransition>
+    </toolkit:TransitionService.NavigationInTransition>
+    <toolkit:TransitionService.NavigationOutTransition>
+        <toolkit:NavigationOutTransition>
+            <toolkit:NavigationOutTransition.Backward>
+                <toolkit:TurnstileTransition Mode="BackwardOut"/>
+            </toolkit:NavigationOutTransition.Backward>
+            <toolkit:NavigationOutTransition.Forward>
+                <toolkit:TurnstileFeatherTransition Mode="ForwardOut" />
+            </toolkit:NavigationOutTransition.Forward>
+        </toolkit:NavigationOutTransition>
+    </toolkit:TransitionService.NavigationOutTransition>
+
+    <!--LayoutRoot is the root grid where all page content is placed-->
+    <Grid x:Name="LayoutRoot" Background="#FF556C7D">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!--TitlePanel contains the name of the application and page title-->
+        <StackPanel x:Name="ScorePanel" Grid.Row="0" Margin="0,12,0,0">
+            <TextBlock x:Name="tbRoundNo" Text="{Binding Round, StringFormat=Picture #\{0\}}" Style="{StaticResource PhoneTextTitle1Style}" Margin="12,0"/>
+            <TextBlock x:Name="tbScore" Text="{Binding Score, StringFormat=Current Score: \{0\} points}" Margin="23,0,0,0" Style="{StaticResource PhoneTextTitle3Style}" />
+            <Border BorderThickness="1" BorderBrush="Black" Margin="12,12" />
+        </StackPanel>
+
+        <!--ContentPanel - place additional content here-->
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0" x:Name="tbQuestion" Text="{Binding CurrentQuestion.QuestionText}" TextWrapping="Wrap" MinHeight="70"/>
+            <StackPanel Grid.Row="1">
+                <Image x:Name="questionImage" Height="300" Width="450"/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <TextBlock x:Name="Attribuition" Text="Photo by" FontSize="16" HorizontalAlignment="Right" />
+                    <HyperlinkButton Content="{Binding CurrentQuestion.Attribution}" NavigateUri="{Binding CurrentQuestion.AttributionUrl}" FontSize="16" TargetName="_blank" HorizontalAlignment="Left"/>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+
+        <StackPanel x:Name="AnswersPanel" Grid.Row="2" HorizontalAlignment="Center">
+            <StackPanel Orientation="Horizontal">
+                <Button x:Name="btnAnswer1" Width="200" Click="AnswerButton"/>
+                <Button x:Name="btnAnswer2" Width="200" Click="AnswerButton"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Button x:Name="btnAnswer3" Width="200" Click="AnswerButton"/>
+                <Button x:Name="btnAnswer4" Width="200" Click="AnswerButton"/>
+            </StackPanel>
+        </StackPanel>
+
+    </Grid>
+
+</phone:PhoneApplicationPage>
