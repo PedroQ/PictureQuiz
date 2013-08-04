@@ -37,9 +37,6 @@ namespace PictureQuiz
         private Bitmap _mask3;
         private Bitmap _maskBackground;
 
-        //Our editing sessions
-        EditingSession _session;
-
         public ImageProcessor()
         {
             //Initialize the filter groups for each difficulty level
@@ -110,35 +107,32 @@ namespace PictureQuiz
         {
             try
             {
-                _session = await EditingSessionFactory.CreateEditingSessionAsync(image);
-
-                switch (level)
+                using (EditingSession _session = await EditingSessionFactory.CreateEditingSessionAsync(image))
                 {
-                    case Difficulty.Easy:
-                        _session.AddFilter(_easyFilterGroup);
-                        break;
-                    case Difficulty.Moderate:
-                        _session.AddFilter(_moderateFilterGroup);
-                        break;
-                    case Difficulty.Hard:
-                        _session.AddFilter(_hardFilterGroup);
-                        break;
-                    case Difficulty.VeryHard:
-                        _session.AddFilter(_veryHardFilterGroup);
-                        break;
-                    case Difficulty.ReallyHard:
-                        _session.AddFilter(_impossibleFilterGroup);
-                        break;
-                    default:
-                        break;
+                    switch (level)
+                    {
+                        case Difficulty.Easy:
+                            _session.AddFilter(_easyFilterGroup);
+                            break;
+                        case Difficulty.Moderate:
+                            _session.AddFilter(_moderateFilterGroup);
+                            break;
+                        case Difficulty.Hard:
+                            _session.AddFilter(_hardFilterGroup);
+                            break;
+                        case Difficulty.VeryHard:
+                            _session.AddFilter(_veryHardFilterGroup);
+                            break;
+                        case Difficulty.ReallyHard:
+                            _session.AddFilter(_impossibleFilterGroup);
+                            break;
+                        default:
+                            break;
+                    }
+
+                    //Render the image to the Image control in the Quiz page
+                    await _session.RenderToImageAsync(resultImage);
                 }
-
-
-                //Render the image to the Image control in the Quiz page
-                await _session.RenderToImageAsync(resultImage);
-
-                _session.Dispose();
-                _session = null;
             }
             catch (Exception e)
             {

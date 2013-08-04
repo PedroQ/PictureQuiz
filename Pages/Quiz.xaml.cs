@@ -52,7 +52,48 @@ namespace PictureQuiz
                     tbQuestion.Visibility = System.Windows.Visibility.Collapsed;
             }
 
+            HideImageStoryboard.Completed += HideImageStoryboard_Completed;
+            RevealImageStoryboard.Completed += RevealImageStoryboard_Completed;
+
             base.OnNavigatedTo(e);
+        }
+
+        void HideImageStoryboard_Completed(object sender, EventArgs e)
+        {
+            //set original picture
+            questionImage.Source = new BitmapImage(new Uri("/" + _viewModel.CurrentQuestion.Picture, UriKind.Relative)) { CreateOptions = BitmapCreateOptions.None };
+
+            RevealImageStoryboard.Begin();
+        }
+
+        void RevealImageStoryboard_Completed(object sender, EventArgs e)
+        {
+            if (_viewModel.Round < 5) //five rounds per game
+            {
+                _viewModel.Round++;
+                _viewModel.NextQuestion();
+            }
+            else
+            {
+                // Display message asking the user if he/she wants to repeat. If not, go back to the menu
+                CustomMessageBox messageBox = new CustomMessageBox()
+                {
+                    Caption = "Game over!",
+                    Message = "Your score: " + _viewModel.Score + Environment.NewLine + "Play again?",
+                    LeftButtonContent = "yes",
+                    RightButtonContent = "no"
+                };
+
+                messageBox.Dismissed += (s1, e1) =>
+                {
+                    if (e1.Result == CustomMessageBoxResult.LeftButton)
+                        LoadQuestionsAndReset();
+                    else
+                        NavigationService.GoBack();
+                };
+
+                messageBox.Show();
+            }
         }
 
         private void _viewModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -82,6 +123,8 @@ namespace PictureQuiz
             Uri questionUri = new Uri(_viewModel.CurrentQuestion.Picture, UriKind.Relative);
             Stream questionImageStream = Application.GetResourceStream(questionUri).Stream;
             await _imgProcessor.ApplyDifficultyToImage(questionImageStream, _difficulty, questionImage);
+
+            LoadQuestionStoryboard.Begin();
         }
 
         private void AnswerButton(object sender, RoutedEventArgs e)
@@ -101,32 +144,7 @@ namespace PictureQuiz
                 IncreaseDifficulty();
             }
 
-            if (_viewModel.Round < 5) //five rounds per game
-            {
-                _viewModel.Round++;
-                _viewModel.NextQuestion();
-            }
-            else
-            {
-                // Display message asking the user if he/she wants to repeat. If not, go back to the menu
-                CustomMessageBox messageBox = new CustomMessageBox()
-                {
-                    Caption = "Game over!",
-                    Message = "Your score: " + _viewModel.Score + Environment.NewLine + "Play again?",
-                    LeftButtonContent = "yes",
-                    RightButtonContent = "no"
-                };
-
-                messageBox.Dismissed += (s1, e1) =>
-                {
-                    if (e1.Result == CustomMessageBoxResult.LeftButton)
-                        LoadQuestionsAndReset();
-                    else
-                        NavigationService.GoBack();
-                };
-
-                messageBox.Show();
-            }
+            HideImageStoryboard.Begin();
         }
 
         private void LoadQuestionsAndReset()
